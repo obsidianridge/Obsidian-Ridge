@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obsidian Ridge</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0D10',
+            surface: '#11151A',
+            border: '#1A1D22',
+            primary: '#E6E8EB',
+            secondary: '#A6ABB3',
+            accent: '#BFC5CC',
+            cream: '#F5F3F0',
+            beige: '#EAE5E0',
+            bronze: '#8B7355',
+            charcoal: '#2A2E35',
+            slate: '#4A5568',
+            ivory: '#F9F7F3',
+            taupe: '#9D8B7E'
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    .tracking-widest-custom { letter-spacing: 0.25em; }
+    .ridge-bg {
+      background-image: 
+        linear-gradient(135deg, rgba(26,29,34,0.4) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(26,29,34,0.3) 0%, transparent 40%);
+      background-size: cover;
+      background-position: center;
+    }
+    .image-placeholder {
+      background: linear-gradient(135deg, #2A2E35 0%, #1A1D22 100%);
+      border: 1px dashed rgba(191, 197, 204, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A6ABB3;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+    .golden-top-border {
+      border-top: 3px solid #D4AF37;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes borderPulse {
+      0%, 100% { border-color: rgba(191, 197, 204, 0.3); }
+      50% { border-color: rgba(191, 197, 204, 0.8); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+    .animate-fade-up-delay { animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+    .animate-fade-up-delay-2 { animation: fadeUp 0.8s ease 0.4s forwards; opacity: 0; }
+    .animate-slide-in-left { animation: slideInLeft 0.8s ease forwards; }
+    .animate-slide-in-right { animation: slideInRight 0.8s ease forwards; }
+    .animate-border-pulse { animation: borderPulse 3s ease-in-out infinite; }
+    .animate-scale-in { animation: scaleIn 0.6s ease forwards; }
+    .service-card { transition: all 0.5s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(191, 197, 204, 0.6); }
+    @keyframes popScale {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1.02); }
+    }
+    .work-item { transition: all 0.4s ease; }
+    .work-item:hover { transform: scale(1.02); }
+    .work-card { animation: popScale 0.6s ease; }
+    @keyframes slideUpStagger {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .service-card-1 { animation: slideUpStagger 0.6s ease forwards; }
+    .service-card-2 { animation: slideUpStagger 0.6s ease 0.15s forwards; opacity: 0; }
+    .service-card-3 { animation: slideUpStagger 0.6s ease 0.3s forwards; opacity: 0; }
+    .service-card-4 { animation: slideUpStagger 0.6s ease 0.45s forwards; opacity: 0; }
+    .service-card-5 { animation: slideUpStagger 0.6s ease 0.6s forwards; opacity: 0; }
+    .service-card-6 { animation: slideUpStagger 0.6s ease 0.75s forwards; opacity: 0; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-obsidian font-sans text-primary overflow-auto">
+  <div class="w-full min-h-full"><!-- Navigation -->
+   <nav class="w-full border-b border-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+     <div class="font-serif text-xl font-medium tracking-wide">
+     <style>
+  .logo {
+    position: absolute;
+    top: 23px;
+    left: 120px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    border: 0.5px solid rgba(201, 169, 110, 0.7);
+    box-shadow: 0 0 15px rgba(201, 169, 110, 0.4);
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<div class="logo">
+  <img src="obsidian.png" class="hidden md:block ..." alt="Logo">
+</div>
+ OBSIDIAN RIDGE
+     </div>
+     <div class="hidden md:flex items-center gap-10"><a href="#services" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">Services</a> <a href="#heritage" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">Heritage</a> <a href="#work" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">Work</a> <a href="#team" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">Team</a> <a href="#about" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">About</a> <a href="#contact" class="text-xs text-secondary tracking-widest-custom uppercase hover:text-primary transition-colors">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-secondary"> <i data-lucide="menu" style="width:20px;height:20px;"></i> </button>
+    </div>
+   </nav><!-- Hero -->
+   <section class="w-full relative overflow-hidden" style="background: linear-gradient(to bottom, rgba(11, 13, 16, 0.4) 0%, rgba(11, 13, 16, 0.7) 50%, rgba(11, 13, 16, 0.9) 100%), url('bg1.png') center/cover no-repeat; min-height: 600px;">
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 100%, rgba(11, 13, 16, 0.5) 100%);"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-32 md:py-48 relative z-10">
+     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div class="flex flex-col items-start max-w-2xl">
+       <p class="text-xs text-secondary tracking-widest-custom uppercase mb-8 animate-fade-up">Digital Infrastructure &amp; Systems</p>
+       <h1 id="hero-headline" class="font-serif text-4xl md:text-6xl lg:text-7xl font-300 leading-tight mb-8 animate-fade-up-delay" style="max-width:800px;">Built With <p style="color: #c9a96e;">
+  PRECISION
+</p></h1>
+       <p id="hero-subtext" class="text-secondary text-base md:text-lg leading-relaxed mb-12 animate-fade-up-delay-2" style="max-width:560px;">Obsidian Ridge builds premium websites, powerful branding, and automated client systems that help businesses look trusted, attract customers, and grow faster.
+</p><a href="#contact" id="hero-cta" class="inline-block border border-accent text-accent text-xs tracking-widest-custom uppercase px-8 py-4 hover:bg-accent hover:text-obsidian transition-all duration-300 animate-fade-up-delay-2">Request Consultation</a>
+      </div>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+<div class="right-cards hidden md:flex">
+
+  <div class="card card1">
+    <div class="card-row">
+      <div class="card-icon">
+        <svg width="24" height="24" fill="none" stroke="#c9a96e" stroke-width="1.8" viewBox="0 0 24 24">
+          <path d="M3 17l6-6 4 4 8-8"/>
+          <path d="M14 7h7v7"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <h3>100+ Businesses Scaled</h3>
+        <p>Across multiple industries</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card2">
+    <div class="card-row">
+      <div class="card-icon">
+        <svg width="24" height="24" fill="none" stroke="#c9a96e" stroke-width="1.8" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20"/>
+          <path d="M12 2a15 15 0 0 1 0 20"/>
+          <path d="M12 2a15 15 0 0 0 0 20"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <h3>High-Converting Websites & Brands</h3>
+        <p>Built for trust and conversions</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card3">
+    <div class="card-row">
+      <div class="card-icon">
+        <svg width="24" height="24" fill="none" stroke="#c9a96e" stroke-width="1.8" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.9V21a2 2 0 1 1-4 0v-.2a1 1 0 0 0-.6-.9 1 1 0 0 0-1.1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.9-.6H3a2 2 0 1 1 0-4h.2a1 1 0 0 0 .9-.6 1 1 0 0 0-.2-1.1l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1 1 0 0 0 1.1.2h.1a1 1 0 0 0 .6-.9V3a2 2 0 1 1 4 0v.2a1 1 0 0 0 .6.9h.1a1 1 0 0 0 1.1-.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1 1 0 0 0-.2 1.1v.1a1 1 0 0 0 .9.6H21a2 2 0 1 1 0 4h-.2a1 1 0 0 0-.9.6z"/>
+        </svg>
+      </div>
+      <div class="card-text">
+        <h3>Automation Systems That Work 24/7</h3>
+        <p>Streamline. Follow up. Close.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+@media (max-width: 767px) {
+  .logo,
+  .logo * {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .right-cards {
+    display: none !important;
+  }
+}
+.right-cards {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Cards */
+.card {
+  width: 320px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.card1 { animation-delay: 0.2s; }
+.card2 { animation-delay: 0.4s; }
+.card3 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Layout */
+.card-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(201,169,110,0.6);
+  background: rgba(201,169,110,0.05);
+  flex-shrink: 0;
+}
+
+/* TEXT STYLING */
+.card-text h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.card-text p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+@media (max-width: 767px) {
+  .logo {
+    display: none !important;
+  }
+}
+</style>
+     </div>
+    </div>
+   </section><!-- Services -->
+   <section id="services" class="w-full border-t border-border relative overflow-hidden golden-top-border" style="background: linear-gradient(180deg, rgba(11, 13, 16, 0.7) 0%, rgba(11, 13, 16, 0.85) 100%), url('xyz.png') center/cover no-repeat; background-attachment: fixed;">
+    <div class="absolute inset-0" style="backdrop-filter: blur(2px); background: rgba(11, 13, 16, 0.5);"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 relative z-10">
+     <p class="text-xs text-accent tracking-widest-custom uppercase mb-16"><p style="color: #c9a96e;">
+  CORE SERVICES
+</p></p>
+     <div class="w-20 h-px bg-gradient-to-r from-white/60 to-transparent mb-10"></div>
+     <div class="grid md:grid-cols-3 gap-px bg-border">
+      <div class="bg-cream p-8 md:p-12 service-card service-card-1 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.2) 0%, rgba(245, 243, 240, 0.4) 100%), url('pic1.png') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.3) 0%, rgba(245, 243, 240, 0.6) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-slate to-charcoal rounded mb-6 flex items-center justify-center"><span class="text-white text-lg font-serif tracking-[0.15em]">
+    01
+</span>        </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Website Designing</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Strategic digital presences designed with precision, focusing on conversion, user experience, and institutional authority.</p>
+       </div>
+      </div>
+      <div class="bg-cream p-8 md:p-12 service-card service-card-2 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.7) 100%), url('editor.jpeg') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.8) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-bronze to-taupe rounded mb-6 flex items-center justify-center"><span class="text-white text-lg font-serif tracking-[0.15em]">
+    02
+</span>
+        </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Editing</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Precision editing crafted to elevate visual storytelling with cinematic quality and refined detail.</p>
+       </div>
+      </div>
+      <div class="bg-cream p-8 md:p-12 service-card service-card-3 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.7) 100%), url('server.jpeg') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.8) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-accent to-slate rounded mb-6 flex items-center justify-center"><span class="text-white text-lg font-serif tracking-[0.15em]">
+    03
+</span>       
+ </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Web Hosting &amp; Infrastructure</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Reliable hosting solutions and scalable backend systems designed for stability, security, and peak performance.</p>
+       </div>
+      </div>
+     </div>
+     <div class="grid md:grid-cols-3 gap-px bg-border mt-px">
+      <div class="bg-cream p-8 md:p-12 service-card service-card-4 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.2) 0%, rgba(245, 243, 240, 0.35) 100%), url('carddesign.jpeg') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.25) 0%, rgba(245, 243, 240, 0.5) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-ivory to-cream rounded mb-6 flex items-center justify-center">
+<span class="text-black text-lg font-serif tracking-[0.15em]">
+    04
+</span>        </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Business Card Design</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Bespoke brand identity materials that reflect institutional excellence and leave a lasting professional impression.</p>
+       </div>
+      </div>
+      <div class="bg-cream p-8 md:p-12 service-card service-card-5 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.7) 100%), url('automation.png') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.5) 0%, rgba(245, 243, 240, 0.8) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-charcoal to-slate rounded mb-6 flex items-center justify-center">
+<span class="text-white text-lg font-serif tracking-[0.15em]">
+    05
+</span>
+        </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Automation Systems</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Workflow automation and process optimization designed to eliminate friction and reduce operational overhead.</p>
+       </div>
+      </div>
+      <div class="bg-cream p-8 md:p-12 service-card service-card-6 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.2) 0%, rgba(245, 243, 240, 0.35) 100%), url('A.png') center/cover no-repeat;">
+       <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.25) 0%, rgba(245, 243, 240, 0.5) 100%); z-index: 1;"></div>
+       <div class="relative z-10">
+        <div class="w-12 h-12 bg-gradient-to-br from-taupe to-bronze rounded mb-6 flex items-center justify-center">
+<span class="text-white text-lg font-serif tracking-[0.15em]">
+    06
+</span>
+        </div>
+        <div class="w-8 h-px bg-charcoal mb-8"></div>
+        <h3 class="font-serif text-2xl mb-4 text-charcoal">Digital Infrastructure</h3>
+        <p class="text-charcoal/80 text-sm leading-relaxed">Scalable systems and business operations architecture built for reliability, growth, and institutional resilience.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Heritage & Motive -->
+   <section id="heritage" class="w-full border-t border-border relative overflow-hidden golden-top-border" style="background: linear-gradient(0deg, rgba(11, 13, 16, 0.7) 0%, rgba(11, 13, 16, 0.85) 100%), url('L.png') center/cover no-repeat; background-attachment: fixed;">
+    <div class="absolute inset-0" style="backdrop-filter: blur(8px); background: rgba(11, 13, 16, 0.5);"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 relative z-10">
+     <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      <div>
+      
+ OUR FOUNDATION
+</p></p>
+       <div class="w-20 h-px bg-gradient-to-r from-white/60 to-transparent mb-8"></div>
+       <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-300 leading-tight mb-8 text-primary">Built on <p style="color: #c9a96e;">
+  Institutional Principles
+</p></h2>
+       <p id="heritage-text" class="text-secondary text-base leading-relaxed">Obsidian Ridge was founded on the belief that digital infrastructure should be treated like institutional architecture — designed for permanence, not trends. We combine decades of systems engineering expertise with a commitment to building reliable, scalable solutions that serve as the backbone of modern businesses. Every project reflects our core philosophy: precision over haste, stability over noise.</p>
+      </div>
+      <div class="border border-border/50 p-8 md:p-12" style="background: rgba(17, 21, 26, 0.8);">
+       <div class="space-y-6">
+        <div>
+         <p class="text-xs text-accent tracking-widest-custom uppercase mb-3"><p style="color: #c9a96e;">
+  Our Mission
+</p></p>
+         <p class="text-sm text-primary leading-relaxed">To build digital infrastructure that serves as a reliable foundation for business growth, designed with institutional rigor and built to endure.</p>
+        </div>
+        <div class="w-full h-px bg-border"></div>
+        <div>
+         <p class="text-xs text-accent tracking-widest-custom uppercase mb-3">Our Values</p>
+         <ul class="text-sm text-secondary space-y-2">
+           <span class="text-primary"><p style="color: #c9a96e;">
+  Precision
+</p></span> — Every decision backed by data and expertise</li>
+           <span class="text-primary"><p style="color: #c9a96e;">
+ Reliability
+</p></span> — Systems built to perform under pressure</li>
+           <span class="text-primary"><p style="color: #c9a96e;">
+  Transparency
+</p></span> — Clear communication and institutional trust</li>
+           <span class="text-primary"><p style="color: #c9a96e;">
+  Excellence
+</p></span> — Uncompromising standards in every deliverable</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Selected Work -->
+   <section id="work" class="w-full border-t border-border relative overflow-hidden golden-top-border" style="background: linear-gradient(180deg, rgba(11, 13, 16, 0.7) 0%, rgba(11, 13, 16, 0.85) 100%), url('L.png') center/cover no-repeat; background-attachment: fixed;">
+    <div class="absolute inset-0" style="backdrop-filter: blur(2px); background: rgba(11, 13, 16, 0.5);"></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 relative z-10">
+     <p class="text-xs text-secondary tracking-widest-custom uppercase mb-16"><p>
+SELECTED WORK
+</p></p>
+     <div class="w-20 h-px bg-gradient-to-r from-white/60 to-transparent mb-12"></div>
+     <div class="space-y-px">
+      <div class="border border-charcoal/20 work-item group relative overflow-hidden" style="background-color: #F9F7F3;">
+       <div style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.15) 0%, rgba(245, 243, 240, 0.35) 100%), url('x.png') center/cover no-repeat; position: relative;">
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.3) 0%, rgba(245, 243, 240, 0.6) 100%); z-index: 1;"></div>
+        <div class="p-8 md:p-12 relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+         <div class="flex-1">
+          <p class="text-xs text-charcoal/70 tracking-widest-custom uppercase mb-3">Hospitality</p>
+          <h3 class="font-serif text-xl md:text-2xl text-charcoal">Restaurant Automation System</h3>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="border border-charcoal/20 work-item group relative overflow-hidden" style="background-color: #F9F7F3;">
+       <div style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.2) 0%, rgba(245, 243, 240, 0.5) 100%), url('y.png') center/cover no-repeat; position: relative;">
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.4) 0%, rgba(245, 243, 240, 0.8) 100%); z-index: 1;"></div>
+        <div class="p-8 md:p-12 relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+         <div class="flex-1">
+          <p class="text-xs text-charcoal/70 tracking-widest-custom uppercase mb-3">Professional Services</p>
+          <h3 class="font-serif text-xl md:text-2xl text-charcoal">Business Portfolio Infrastructure</h3>
+         </div>
+         <div class="text-charcoal/70 group-hover:text-charcoal transition-colors flex-shrink-0">
+          <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="border border-charcoal/20 work-item group relative overflow-hidden" style="background-color: #F9F7F3;">
+       <div style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.2) 0%, rgba(245, 243, 240, 0.5) 100%), url('z.png') center/cover no-repeat; position: relative;">
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(245, 243, 240, 0.4) 0%, rgba(245, 243, 240, 0.8) 100%); z-index: 1;"></div>
+        <div class="p-8 md:p-12 relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+         <div class="flex-1">
+          <p class="text-xs text-charcoal/70 tracking-widest-custom uppercase mb-3">Operations</p>
+          <h3 class="font-serif text-xl md:text-2xl text-charcoal">Booking &amp; CRM Integration System</h3>
+         </div>
+         <div class="text-charcoal/70 group-hover:text-charcoal transition-colors flex-shrink-0">
+          <i data-lucide="arrow-right" style="width:20px;height:20px;"></i>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Team -->
+   <section id="team" class="w-full border-t border-border">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32">
+     <p class="text-xs text-secondary tracking-widest-custom uppercase mb-16 style="color: #c9a96e;"> <p style="color: #c9a96e;">
+LEADERSHIP
+</p>
+  <div class="w-20 h-px bg-gradient-to-r from-white/60 to-transparent mb-12"></div>
+     <div class="space-y-px">
+</p>
+ <div class="w-12 h-px bg-gradient-to-r from-obsidian/40 to-transparent mb-12"></div>
+     <div class="w-12 h-px bg-gradient-to-r from-obsidian/40 to-transparent mb-12"></div>
+     <div class="grid md:grid-cols-2 gap-8 md:gap-12"><!-- Soham Ghosh -->
+      <div class="border border-border p-8 md:p-12">
+       <div class="w-32 h-32 rounded-full bg-gradient-to-br from-beige to-cream border-2 border-accent flex items-center justify-center mx-auto mb-8">
+        <div class="text-center">
+         <p class="font-serif text-xl font-500 text-obsidian">SG</p>
+        </div>
+       </div>
+       <h3 class="font-serif text-2xl text-center mb-2">Soham Ghosh</h3>
+       <p class="text-accent text-xs tracking-widest-custom uppercase text-center mb-6"<p style="color: #c9a96e;">
+  Co-Founder &amp; Creative Director
+</p></p>
+       <p class="text-secondary text-sm leading-relaxed text-center">Web designer and brand architect. Specializes in business logo design, brand identity systems, and digital card design. Brings precision and aesthetic expertise to every client engagement.</p>
+      </div><!-- Nirajit Sarkar -->
+      <div class="border border-border p-8 md:p-12">
+       <div class="w-32 h-32 rounded-full bg-gradient-to-br from-cream to-beige border-2 border-accent flex items-center justify-center mx-auto mb-8">
+        <div class="text-center">
+         <p class="font-serif text-xl font-500 text-obsidian">NS</p>
+        </div>
+       </div>
+       <h3 class="font-serif text-2xl text-center mb-2">Nirajit Sarkar</h3>
+       <p class="text-accent text-xs tracking-widest-custom uppercase text-center mb-6"<p style="color: #c9a96e;">
+  Co-Founder &amp; Operations Lead
+</p></p>
+       <p class="text-secondary text-sm leading-relaxed text-center">Editor and social media strategist. Manages content systems, digital communications, and client engagement. Ensures every project delivery meets institutional standards.</p>
+      </div>
+     </div>
+    </div>
+   </section>
+  </div><!-- About -->
+  <section id="about" class="w-full border-t border-border relative overflow-hidden golden-top-border" style="background: linear-gradient(0deg, rgba(245, 243, 240, 0.75) 0%, rgba(245, 243, 240, 0.85) 100%), url('xyz.png') center/cover no-repeat; background-attachment: fixed;">
+   <div class="absolute inset-0" style="backdrop-filter: blur(8px); background: rgba(245, 243, 240, 0.3);"></div>
+   <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+     <div>
+      <p class="text-xs text-secondary tracking-widest-custom uppercase mb-16">ABOUT US</p>
+      <div class="w-20 h-px bg-gradient-to-r from-obsidian/40 to-transparent mb-12"></div>
+      <p id="about-text" class="font-serif text-2xl md:text-3xl lg:text-4xl font-300 leading-relaxed text-charcoal">Obsidian Ridge has always stood as a symbol of strength, vision, and enduring purpose. Long before trends came and went, our foundation was rooted in craftsmanship, resilience, and quiet innovation.</p>
+     </div>
+     <div class="rounded-lg overflow-hidden" style="height: 400px; width: 100%;">
+      <img src="xyz.png" alt="Obsidian Ridge workspace" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; opacity: 1;" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #F5F3F0 0%, #EAE5E0 100%)'; this.alt='Image unavailable';">
+     </div>
+    </div>
+   </div>
+  </section><!-- Contact -->
+  <section id="contact" class="w-full border-t border-border relative overflow-hidden golden-top-border" style="background: linear-gradient(135deg, rgba(11, 13, 16, 0.8) 0%, rgba(11, 13, 16, 0.9) 100%), url('L.png') center/cover no-repeat; background-attachment: fixed;">
+   <div class="absolute inset-0" style="background: rgba(11, 13, 16, 0.3);"></div>
+   <div class="max-w-7xl mx-auto px-6 md:px-12 py-24 md:py-32 relative z-10">
+    <p class="text-xs text-secondary tracking-widest-custom uppercase mb-16"><p style="color: #c9a96e;">
+ CONTACT
+</p></p>
+    <div class="w-20 h-px bg-gradient-to-r from-white/60 to-transparent mb-12"></div>
+    <div class="max-w-xl">
+     <form id="contact-form" class="space-y-6">
+      <div>
+       <label for="name" class="block text-xs text-secondary tracking-widest-custom uppercase mb-3">Name</label> <input type="text" id="name" class="w-full bg-surface border border-border px-5 py-4 text-sm text-primary focus:border-accent focus:outline-none transition-colors" required>
+      </div>
+      <div>
+       <label for="email" class="block text-xs text-secondary tracking-widest-custom uppercase mb-3">Email</label> <input type="email" id="email" class="w-full bg-surface border border-border px-5 py-4 text-sm text-primary focus:border-accent focus:outline-none transition-colors" required>
+      </div>
+      <div>
+       <label for="company" class="block text-xs text-secondary tracking-widest-custom uppercase mb-3">Company</label> <input type="text" id="company" class="w-full bg-surface border border-border px-5 py-4 text-sm text-primary focus:border-accent focus:outline-none transition-colors">
+      </div>
+      <div>
+       <label for="description" class="block text-xs text-secondary tracking-widest-custom uppercase mb-3">Project Description</label> <textarea id="description" rows="5" class="w-full bg-surface border border-border px-5 py-4 text-sm text-primary focus:border-accent focus:outline-none transition-colors resize-none" required></textarea>
+
+      </div><button type="submit" class="border border-accent text-accent text-xs tracking-widest-custom uppercase px-8 py-4 hover:bg-accent hover:text-obsidian transition-all duration-300">Submit Request</button>
+     </form>
+     <div id="form-success" class="hidden mt-8 p-6 border border-accent/30">
+      <p class="text-accent text-sm">Your request has been received. We will be in touch shortly.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="w-full border-t border-border">
+   <div class="max-w-7xl mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="font-serif text-sm tracking-wide">
+     OBSIDIAN RIDGE
+    </div>
+    <p class="text-xs text-secondary">© 2024 Obsidian Ridge. All rights reserved.</p>
+   </div>
+  </footer>
+  <script>
+    const defaultConfig = {
+      hero_headline: 'Systems built for precision',
+      hero_subtext: 'We design digital infrastructure, automation systems, and high-performance websites for businesses that value stability over noise.',
+      cta_text: 'Request Consultation',
+      about_text: 'Obsidian Ridge is a systems-focused digital firm building reliable, scalable, and precise infrastructure for businesses that prioritize long-term stability over short-term design trends.',
+      heritage_text: 'Obsidian Ridge was founded on the belief that digital infrastructure should be treated like institutional architecture — designed for permanence, not trends. We combine decades of systems engineering expertise with a commitment to building reliable, scalable solutions that serve as the backbone of modern businesses. Every project reflects our core philosophy: precision over haste, stability over noise.',
+      background_color: '#0B0D10',
+      surface_color: '#11151A',
+      text_color: '#E6E8EB',
+      accent_color: '#BFC5CC',
+      secondary_text_color: '#A6ABB3',
+      font_family: 'Cormorant Garamond',
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      document.getElementById('hero-headline').textContent = config.hero_headline || defaultConfig.hero_headline;
+      document.getElementById('hero-subtext').textContent = config.hero_subtext || defaultConfig.hero_subtext;
+      document.getElementById('hero-cta').textContent = config.cta_text || defaultConfig.cta_text;
+      document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+      document.getElementById('heritage-text').textContent = config.heritage_text || defaultConfig.heritage_text;
+
+      const font = config.font_family || defaultConfig.font_family;
+      document.querySelectorAll('.font-serif').forEach(el => {
+        el.style.fontFamily = `${font}, serif`;
+      });
+
+      const size = config.font_size || defaultConfig.font_size;
+      document.getElementById('hero-subtext').style.fontSize = `${size}px`;
+      document.getElementById('about-text').style.fontSize = `${size * 1.8}px`;
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => { applyConfig(config); },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+          { get: () => config.secondary_text_color || defaultConfig.secondary_text_color, set: (v) => { config.secondary_text_color = v; window.elementSdk.setConfig({ secondary_text_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['hero_headline', config.hero_headline || defaultConfig.hero_headline],
+        ['hero_subtext', config.hero_subtext || defaultConfig.hero_subtext],
+        ['cta_text', config.cta_text || defaultConfig.cta_text],
+        ['about_text', config.about_text || defaultConfig.about_text],
+        ['heritage_text', config.heritage_text || defaultConfig.heritage_text]
+      ])
+    });
+
+    // Form handling
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('contact-form').classList.add('hidden');
+      document.getElementById('form-success').classList.remove('hidden');
+    });
+
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const nav = document.querySelector('nav .hidden');
+      if (nav) nav.classList.toggle('hidden');
+    });
+
+    lucide.createIcons();
+ 
+ </script>
+<!-- EmailJS LOAD -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<!-- Your script -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  emailjs.init("oxgplrW7j9gczQNSr");
+
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    console.log("Form submitted");
+
+    emailjs.send("service_34jtbcq", "template_v54wd2a", {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      company: document.getElementById("company").value,
+      message: document.getElementById("description").value
+    })
+    .then(() => {
+      document.getElementById("form-success").classList.remove("hidden");
+      this.reset();
+    })
+    .catch((error) => {
+      console.log("ERROR:", error);
+    });
+
+  });
+
+});
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f70965273cacc20',t:'MTc3Nzk5MjkzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
